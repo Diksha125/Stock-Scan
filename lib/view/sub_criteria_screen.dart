@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_scan_task/model/model.dart';
+import 'package:stock_scan_task/view/param_screen.dart';
 import 'package:stock_scan_task/view/variables_screen.dart';
 
 class SubCriteria extends StatefulWidget {
   final List<Criteria> criteria;
   final StockData stockData;
   const SubCriteria(
-      {super.key, required this.criteria, required this.stockData});
+      {super.key,required this.stockData, required this.criteria});
 
   @override
   State<SubCriteria> createState() => _SubCriteriaState();
@@ -50,7 +52,7 @@ class _SubCriteriaState extends State<SubCriteria> {
                   ],
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: ListView.separated(
                   itemCount: widget.criteria.length,
                   separatorBuilder: (BuildContext context, int index) {
@@ -69,24 +71,33 @@ class _SubCriteriaState extends State<SubCriteria> {
                         : const SizedBox();
                   },
                   itemBuilder: (context, index) {
-                    final Criteria data = widget.criteria[index];
                     return InkWell(
                       onTap: () {
-                        if(widget.criteria[index].variable!.isEmpty != true) {
+                        if (widget.criteria[index].variable!.isEmpty != true) {
                           Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VariableScreen(
-                              criteria: widget.criteria,
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VariableScreen(
+                                criteria: widget.criteria,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
+                        if(widget.criteria[index].variable!.length == 3){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ParamScreen(
+                                criteria: widget.criteria,
+                              ),
+                            ),
+                          );
                         }
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          data.text.toString(),
+                          widget.criteria[index].text.toString(),
                           style: const TextStyle(
                             fontSize: 10.0,
                             color: Colors.white,
