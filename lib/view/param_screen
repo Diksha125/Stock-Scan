@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:stock_scan_task/model/model.dart';
+
+class ParamScreen extends StatelessWidget {
+  final List<Criteria> criteria;
+
+  const ParamScreen({super.key, required this.criteria});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+        child: Container(
+          width: double.infinity,
+          color: Theme.of(context).colorScheme.onBackground,
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+          child: Column(
+            children: [
+              const Text(
+                'CCI',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Set Parameters',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                color: Theme.of(context).colorScheme.shadow,
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+                child: const Row(
+                  children: [
+                    Text(
+                      'Period',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: '20'
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
